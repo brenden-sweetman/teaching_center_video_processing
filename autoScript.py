@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Title: Auto Script for Teaching Center Video Encoding
 # Author: Brenden Sweetman
 #   brenden.sweetman@wustl.edu
@@ -109,7 +110,7 @@ def main():
     #End program
     sys.stdout.write(BLUE)
     print("I have finished prossesing the all files provided in the Copied foler.")
-    print("NOTE: if any files remian in the Copied folder I did not prosses them. Check the red text above for errors")
+    print("NOTE: if any files remian in the Copied folder I did not process them. Check the red text above for errors")
     sys.stdout.write(RESET)
 
 # the cmdHandler() compiles a list of commands and class ffmpeg for file passed from errorHandler()
@@ -138,17 +139,23 @@ def cmdHandler(files):
         finalFileName="Final/"+files[0]
         command.append(finalFileName)
     sys.stdout.write(BLUE)
-    print("Processing...")
+    print("Processing...\n\n")
     sys.stdout.write(RESET)
     # run ffmpeg with compiled command
     subprocess.run(command)
     # Anounce the finished encode
     sys.stdout.write(BLUE)
     print(finalFileName[6:]+ " is done and ready for upload.")
+    boxUpload(finalFileName)
     sys.stdout.write(RESET)
     # move original to done folder
     for f in files:
         subprocess.run(["mv",cwd+"/Copied/"+f,cwd+"/Copied/Done"])
+
+def boxUpload(filePath):
+    #Pass file off to box_upload.py
+    command=["box_upload.py","-f",cwd+"/"+filePath,"-c",cwd+"/"+box_initial.cfg]
+    subprocess.run(command)
 
 #errorHandler checks the naming convention for file passed from main()
 def errorHandler(files):
