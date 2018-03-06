@@ -142,7 +142,7 @@ def cmdHandler(files):
     print("Processing...\n\n")
     sys.stdout.write(RESET)
     # run ffmpeg with compiled command
-    subprocess.run(command)
+    # subprocess.run(command)
     # Anounce the finished encode
     sys.stdout.write(BLUE)
     print(finalFileName[6:]+ " is done and ready for upload.")
@@ -154,7 +154,7 @@ def cmdHandler(files):
 
 def boxUpload(filePath):
     #Pass file off to box_upload.py
-    command=["box_upload.py","-f",cwd+"/"+filePath,"-c",cwd+"/"+box_initial.cfg]
+    command=["./box_upload.py","-f",cwd+"/"+filePath,"-c",cwd+"/box_initial.cfg"]
     subprocess.run(command)
 
 #errorHandler checks the naming convention for file passed from main()
