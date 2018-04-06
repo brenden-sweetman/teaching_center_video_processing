@@ -154,7 +154,7 @@ def cmdHandler(files):
 
 def boxUpload(filePath):
     #Pass file off to box_upload.py
-    command=["./box_upload.py","-f",cwd+"/"+filePath,"-c",cwd+"/box_initial.cfg"]
+    command=["./box_upload.py","-f",cwd+"/"+filePath,"-c",cwd+"/upload.cfg","-i","47434826943"]
     subprocess.run(command)
 
 #errorHandler checks the naming convention for file passed from main()
